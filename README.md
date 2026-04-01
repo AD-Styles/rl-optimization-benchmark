@@ -12,7 +12,7 @@
 2. **Domain-Specific Reward Shaping (CliffWalking):** 가혹한 패널티가 학습에 미치는 영향을 분석하고, 보상 재설계를 통해 최적 정책 도출.
 3. **Universal Hash-based Q-Table (Blackjack):** 정수형 상태를 넘어 튜플(Tuple) 형태의 다차원 상태 공간을 수용하는 해시 기반 에이전트 설계.
 
-## 1. 실험 환경 및 단계별 도전 과제 (Dojang-Breaking Stages)
+## 1. 실험 환경 및 단계별 도전 과제 (3 Stages)
 | 도장깨기 순서 | 환경 (Environment) | 도전 과제 (Challenge) | 상태 공간 특성 | 학습 목표 |
 | :---: | :--- | :--- | :--- | :--- |
 | **Stage 1 (🥉)** | **Taxi-v3** | 코드 재사용 및 대규모 상태 제어 | 500 (Integer) | 효율적인 승객 운송 시퀀스 학습 |
