@@ -88,8 +88,8 @@ def plot_results(history: list, env_id: str, alpha: float, save_path: str):
 if __name__ == "__main__":
     os.makedirs("results", exist_ok=True)
     
-    # 도장깨기 순서 적용 (Blackjack -> CliffWalking -> Taxi)
-    target_envs = ["Blackjack-v1", "CliffWalking-v1", "Taxi-v3"]
+    # 도장깨기 순서 및 공식 환경 이름 완벽 적용 (Taxi -> CliffWalking -> Blackjack)
+    target_envs = ["Taxi-v3", "CliffWalking-v1", "Blackjack-v1"]
     alphas = [0.1, 0.5]
     episodes = 2000
     
