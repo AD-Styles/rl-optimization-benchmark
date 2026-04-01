@@ -1,3 +1,8 @@
+# ==========================================
+# [Professional RL Library for Portfolio]
+# Components: Agent, Environment, Utils, Train
+# ==========================================
+
 import os
 import numpy as np
 import gymnasium as gym
@@ -10,11 +15,10 @@ sns.set_theme(style="darkgrid")
 
 class GeneralizedQAgent:
     """
-    CliffWalking(정수), Taxi(정수), Blackjack(튜플) 상태를 모두 수용하는 범용 에이전트
+    튜플형 상태(Blackjack)부터 정수형 상태(CliffWalking, Taxi)까지 모두 수용하는 범용 에이전트
     """
     def __init__(self, action_size: int, lr: float = 0.1, gamma: float = 0.99, epsilon: float = 1.0):
         self.action_size = action_size
-        # 해시 가능한 모든 상태(정수/튜플)를 수용하는 Q-Table
         self.q_table = defaultdict(lambda: np.zeros(action_size))
         self.lr = lr
         self.gamma = gamma
@@ -42,7 +46,11 @@ class EnvManager:
     def __init__(self, env_id: str):
         self.env_id = env_id
         self.env = gym.make(env_id)
-        self.action_size = self.env.action_space.n
+        # Blackjack은 분리된 action_space 처리 필요, 나머지 환경은 기본 .n 사용
+        if hasattr(self.env.action_space, 'n'):
+            self.action_size = self.env.action_space.n
+        else:
+            self.action_size = 2 # Blackjack default actions (Hit, Stick)
 
     def reset(self):
         state, _ = self.env.reset()
@@ -53,12 +61,12 @@ class EnvManager:
         done = terminated or truncated
         
         # [Domain-Specific Reward Shaping]
-        if self.env_id == "CliffWalking-v0":
+        if self.env_id == "CliffWalking-v1":
             if terminated and reward == -100:
-                reward = -10.0 # 절벽 추락 패널티 완화 (학습 가속화)
+                reward = -10.0 # 절벽 추락 패널티 완화 (학습 가속화 및 정책 수렴 유도)
         elif self.env_id == "Taxi-v3":
             if not done:
-                reward = -1.1  # 불필요한 배회 방지용 패널티 강화
+                reward = -1.1  # 불필요한 배회 방지용 스텝 패널티 미세 강화
                 
         return next_state, reward, done
 
@@ -80,8 +88,8 @@ def plot_results(history: list, env_id: str, alpha: float, save_path: str):
 if __name__ == "__main__":
     os.makedirs("results", exist_ok=True)
     
-    # 3가지 실습 환경 완벽 포함
-    target_envs = ["CliffWalking-v0", "Taxi-v3", "Blackjack-v1"]
+    # 도장깨기 순서 적용 (Blackjack -> CliffWalking -> Taxi)
+    target_envs = ["Blackjack-v1", "CliffWalking-v1", "Taxi-v3"]
     alphas = [0.1, 0.5]
     episodes = 2000
     
@@ -112,4 +120,4 @@ if __name__ == "__main__":
             plot_results(history, env_id, alpha, f"results/{env_id}_alpha_{alpha}.png")
             
         manager.close()
-    print("\n✅ 모든 실습 파일 기반 벤치마크 완료 및 이미지 저장 성공.")
+    print("\n✅ 1~3단계 도장깨기 벤치마크 완료 및 이미지 저장 성공.")
