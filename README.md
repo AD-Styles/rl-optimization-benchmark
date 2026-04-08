@@ -40,6 +40,8 @@
     ├── requirements.txt 
     └── README.md        
 
+---
+
 ## 3. 실험 결과 및 하이퍼파라미터 민감도 분석 (Results & Sensitivity Analysis)
 각 단계별 환경에서 동일한 모델에 대해 학습률(`Alpha=0.1` vs `Alpha=0.5`)을 다르게 적용하여 수렴 안정성을 교차 검증.
 
