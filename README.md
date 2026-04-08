@@ -4,6 +4,8 @@
 ![Gymnasium](https://img.shields.io/badge/Gymnasium-0.29.1-lightgrey.svg)
 ![Seaborn](https://img.shields.io/badge/Seaborn-0.12.2-blue.svg)
 
+---
+
 ## 📌 프로젝트 요약 (Executive Summary)
 본 프로젝트는 강화학습 에이전트가 단일 환경의 튜토리얼 수준을 넘어, 점진적으로 고도화되는 3단계 도장깨기(Taxi -> CliffWalking -> Blackjack)를 하나의 알고리즘으로 작성한 포트폴리오입니다. 단순 코드 재사용부터 보상 설계, 그리고 자료구조의 확장까지 엔지니어링 역량이 발전하는 과정을 데이터로 증명하려고 노력했습니다.
 
