@@ -18,6 +18,8 @@
 | **도메인 맞춤형 보상 설계<br>(Domain-Specific Reward Shaping)** | **CliffWalking** | 가혹한 패널티가 학습에 미치는 영향을 분석하고, 보상 재설계를 통해 최적 정책 도출. |
 | **범용 해시 기반 자료구조<br>(Universal Hash-based Q-Table)** | **Blackjack** | 정수형 상태를 넘어 튜플(Tuple) 형태의 다차원 상태 공간을 수용하는 해시 기반 에이전트 설계. |
 
+---
+
 ## 1. 실험 환경 및 단계별 도전 과제 (3 Stages)
 | 도장깨기 순서 | 환경 (Environment) | 도전 과제 (Challenge) | 상태 공간 특성 | 학습 목표 |
 | :---: | :--- | :--- | :--- | :--- |
